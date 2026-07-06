@@ -1,0 +1,5 @@
+.env
+*.md
+*.json
+**/__pycache__/
+*.py[cod]
