@@ -17,6 +17,4 @@ def save_manifest(manifest: dict) -> None:
 
 
 def hash_article(article: dict) -> str:
-    # Hash the raw HTML body, NOT the post-processed markdown, so the hash
-    # only changes when the source content actually changes.
     return hashlib.sha256(article["body"].encode("utf-8")).hexdigest()

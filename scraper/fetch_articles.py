@@ -5,6 +5,7 @@ BASE_URL = os.environ.get("ZENDESK_BASE_URL", "https://support.optisigns.com")
 PER_PAGE = 100
 MAX_ARTICLES = int(os.environ.get("MAX_ARTICLES", "0"))  # 0 = no limit (production)
 
+
 def fetch_all_articles():
     """Fetch all published articles from Zendesk Help Center API.
     Handles pagination via `next_page` and basic 429 backoff.

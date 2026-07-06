@@ -2,6 +2,7 @@ import re
 from bs4 import BeautifulSoup
 from markdownify import MarkdownConverter
 
+
 class OptiSignsConverter(MarkdownConverter):
     """Custom markdownify converter with Zendesk-specific cleanup."""
 
