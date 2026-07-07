@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.env
+docs/
+manifest.json
+vectorstore_state.json
+.git/

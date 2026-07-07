@@ -1,0 +1,4 @@
+# Bỏ qua tất cả mọi thứ trong thư mục này
+*
+# Ngoại trừ chính tệp .gitignore này để Git giữ lại thư mục
+!.gitignore

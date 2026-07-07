@@ -20,7 +20,6 @@ def fetch_all_articles():
 
     # --- GIAI ĐOẠN 1: Ưu tiên lấy các bài theo QUERY ---
     if SEARCH_QUERY:
-        print(f"Phase 1: Fetching articles matching query '{SEARCH_QUERY}'...")
         # Sử dụng API Search của Zendesk
         url = f"{BASE_URL}/api/v2/help_center/articles/search.json?query={SEARCH_QUERY}&per_page={PER_PAGE}&page=1"
         
@@ -43,20 +42,15 @@ def fetch_all_articles():
 
                 # Dừng sớm nếu chế độ giới hạn số lượng đã thỏa mãn
                 if MAX_ARTICLES and len(articles) >= MAX_ARTICLES:
-                    print(f"Reached MAX_ARTICLES={MAX_ARTICLES} during Phase 1.")
                     return articles
 
             url = data.get("next_page")
             if url:
                 time.sleep(0.3)
-        print(f"Phase 1 finished. Collected {len(articles)} targeted articles.")
 
     # --- GIAI ĐOẠN 2: Lấy các bài còn lại nếu chưa đủ số lượng ---
     # Điều kiện chạy tiếp: Không giới hạn (MAX_ARTICLES=0) HOẶC số lượng hiện tại vẫn nhỏ hơn MAX_ARTICLES
     if not MAX_ARTICLES or len(articles) < MAX_ARTICLES:
-        remaining_needed = MAX_ARTICLES - len(articles) if MAX_ARTICLES else "unlimited"
-        print(f"Phase 2: Fetching remaining articles (Needs: {remaining_needed})...")
-        
         url = f"{BASE_URL}/api/v2/help_center/en-us/articles.json?per_page={PER_PAGE}&page=1"
         
         while url:
@@ -77,7 +71,6 @@ def fetch_all_articles():
                 seen_ids.add(a["id"])
 
                 if MAX_ARTICLES and len(articles) >= MAX_ARTICLES:
-                    print(f"Reached MAX_ARTICLES={MAX_ARTICLES} during Phase 2.")
                     return articles
 
             url = data.get("next_page")
