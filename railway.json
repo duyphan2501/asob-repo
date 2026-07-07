@@ -1,0 +1,9 @@
+{
+  "$schema": "https://railway.com",
+  "build": {
+    "builder": "DOCKERFILE"
+  },
+  "deploy": {
+    "cronSchedule": "50 16 * * *"
+  }
+}
