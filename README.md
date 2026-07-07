@@ -41,7 +41,7 @@ docker run --rm \
 
 The project relies on OpenAI Vector Store for document chunking instead of splitting Markdown files manually. This keeps the ingestion pipeline simple while allowing OpenAI to handle semantic chunk boundaries and future improvements automatically.
 
-For the scraped OptiSigns knowledge base, most Markdown articles are relatively short (typically around 1,000–3,000 tokens after cleaning), with clear heading-based sections. For this type of documentation, OpenAI's default automatic chunking provides good retrieval quality without introducing additional preprocessing complexity.
+For the scraped OptiSigns knowledge base, most Markdown articles are relatively short (typically around 500–2,000 tokens after cleaning), with clear heading-based sections. For this type of documentation, OpenAI's default automatic chunking provides good retrieval quality without introducing additional preprocessing complexity.
 
 Therefore, the upload request omits the `chunking_strategy` field and lets OpenAI use its current automatic behavior (approximately 800-token chunks with 400-token overlap).
 

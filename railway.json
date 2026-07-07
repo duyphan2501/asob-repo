@@ -4,6 +4,6 @@
     "builder": "DOCKERFILE"
   },
   "deploy": {
-    "cronSchedule": "50 16 * * *"
+    "cronSchedule": "24 17 * * *"
   }
 }
