@@ -2,7 +2,7 @@ name: Daily OptiBot Update
 
 on:
   schedule:
-    - cron: '0 2 * * *'   # 2:00 UTC daily
+    - cron: '30 13 * * *'   # 20h30 Việt Nam
   workflow_dispatch: {}    
 
 jobs:
