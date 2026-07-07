@@ -18,14 +18,11 @@ def fetch_all_articles():
     articles = []
     seen_ids = set()
 
-    # --- GIAI ĐOẠN 1: Ưu tiên lấy các bài theo QUERY ---
     if SEARCH_QUERY:
-        # Sử dụng API Search của Zendesk
         url = f"{BASE_URL}/api/v2/help_center/articles/search.json?query={SEARCH_QUERY}&per_page={PER_PAGE}&page=1"
         
         while url:
             data = fetch_with_retry(url)
-            # API Search trả về mảng kết quả trong key 'results'
             for a in data.get("results", []):
                 if a.get("draft") or a["id"] in seen_ids:
                     continue
@@ -40,7 +37,6 @@ def fetch_all_articles():
                 })
                 seen_ids.add(a["id"])
 
-                # Dừng sớm nếu chế độ giới hạn số lượng đã thỏa mãn
                 if MAX_ARTICLES and len(articles) >= MAX_ARTICLES:
                     return articles
 
@@ -48,17 +44,14 @@ def fetch_all_articles():
             if url:
                 time.sleep(0.3)
 
-    # --- GIAI ĐOẠN 2: Lấy các bài còn lại nếu chưa đủ số lượng ---
-    # Điều kiện chạy tiếp: Không giới hạn (MAX_ARTICLES=0) HOẶC số lượng hiện tại vẫn nhỏ hơn MAX_ARTICLES
     if not MAX_ARTICLES or len(articles) < MAX_ARTICLES:
         url = f"{BASE_URL}/api/v2/help_center/en-us/articles.json?per_page={PER_PAGE}&page=1"
         
         while url:
             data = fetch_with_retry(url)
-            # API List thông thường trả về mảng kết quả trong key 'articles'
             for a in data.get("articles", []):
                 if a.get("draft") or a["id"] in seen_ids:
-                    continue  # Bỏ qua nếu là bản nháp hoặc đã được lấy ở Phase 1
+                    continue  
                 
                 articles.append({
                     "id": a["id"],

@@ -9,7 +9,7 @@ load_dotenv()
 
 from scraper.convert_to_markdown import article_to_markdown, slugify
 from scraper.fetch_articles import fetch_all_articles
-from scraper.manifest import hash_article
+from scraper.hashing import hash_article
 from vectorstore.remote_manifest import get_remote_manifest
 from vectorstore.upload import upload_changed_docs
 

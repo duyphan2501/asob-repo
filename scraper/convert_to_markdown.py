@@ -14,9 +14,6 @@ class OptiSignsConverter(MarkdownConverter):
         return text
 
     def convert_p(self, el, text, **kwargs):
-        # Older articles fake headings with <p><strong>Heading</strong></p>
-        # instead of real <h2>/<h3>. Promote them so chunking (Task 2) can
-        # still split on section boundaries.
         children = [c for c in el.children if getattr(c, "name", None) or str(c).strip()]
         if (
             len(children) == 1

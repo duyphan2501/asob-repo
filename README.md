@@ -60,8 +60,9 @@ The reported chunk count is intended for monitoring only. The actual chunk creat
 
 ## Daily job logs
 
-The job runs automatically once a day via GitHub Actions (`.github/workflows/daily.yml`).
-View logs for each run at: `https://github.com/duyphan2501/asob-repo/actions/workflows/daily.yml`
+The job runs automatically once a day on Railway (Cron Job service).
+Railway does not provide a public, no-login link to view logs, so only the last run's result is included as a screenshot artefact:
+![Last Run Artefact](./assets/LastRunArtefact.PNG)
 
 ## Screenshot
 

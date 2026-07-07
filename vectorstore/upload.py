@@ -5,7 +5,6 @@ from openai import OpenAI
 
 from utils.retry import openai_with_retry
 
-VECTOR_STORE_NAME = "optibot-support-docs"
 DOCS_DIR = os.path.join(os.path.dirname(__file__), "..", "docs")
 
 ENCODING = tiktoken.get_encoding("cl100k_base")
@@ -39,7 +38,6 @@ else:
 
 STEP = ESTIMATE_CHUNK_SIZE - ESTIMATE_CHUNK_OVERLAP
 
-
 def estimate_chunks(file_path: str) -> int:
     """Estimate chunk count for reporting purposes only — OpenAI does not
     return an exact chunk count via the API, so this approximates what
@@ -54,11 +52,6 @@ def estimate_chunks(file_path: str) -> int:
         return 1
 
     return math.ceil((tokens - ESTIMATE_CHUNK_SIZE) / STEP) + 1
-
-
-def get_client() -> OpenAI:
-    return OpenAI(api_key=os.environ["OPENAI_API_KEY"])
-
 
 def upload_changed_docs(
     client,
